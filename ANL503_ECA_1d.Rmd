@@ -1,0 +1,101 @@
+---
+title: "ANL503_ECA_1d"
+output: word_document
+date: "2023-11-08"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Loading packages 
+```{r}
+library(RMySQL)
+library(readr) # package that reads and parses flat datafiles such as CSV files into R dataframes
+library(data.table) # extends features of R dataframes to enable more efficient data analysis and data manipulation
+library(sqldf) # enables SQL queries to be ran on dataframes in R
+library(dplyr)
+library(tidyr)
+```
+
+# Establishing connnection to MySQL database
+```{r}
+con <- dbConnect(MySQL(), user = "root", password = "bay123456", dbname = "ANL503")
+```
+
+# Reading "'doc_survey" table into R dataframe
+```{r}
+# Reading the table into an R data frame
+dataframe <- dbReadTable(con, "doc_survey")
+dataframe
+```
+# Running linear regression model
+```{r}
+lm(Y ~ X1 + X2 + X3 + X4 + X5 + AGE + GENDER + WTYPE , dataframe) -> lm_sat
+summary(lm_sat)
+
+## checking correlation level between outcome variable and eac independent variable
+cor(dataframe$X1 , dataframe$Y) # 0.8652688
+cor(dataframe$X2 , dataframe$Y) # 0.8915433
+cor(dataframe$X3 , dataframe$Y) # 0.9129154
+cor(dataframe$X4 , dataframe$Y) # 0.8973897
+cor(dataframe$X5 , dataframe$Y) # 0.9105011
+cor(dataframe$AGE , dataframe$Y) # NA
+```
+Based on the lm() output, we can quickly infer that coefficients "X1" to "X5" are the most statistically significant and can potentially impact the outcome variable "Y" the most. This can be seen from the *** sign of all 5 coefficients. Additionally, the p-values of all 5 coefficients are < 0.05, which represents statistical significance.
+
+In terms of the coefficient estimate values, we can see that 'X3' has the most impact on the outcome variable since it has the highest coefficient estimate value of 0.373128. This means that for every increase in rating of X3, the overall satisfaction rating improves by 0.373128.
+
+Regarding 'AGE' coefficient, it has a very low statistical significance as seen by the presence of one * . Although it has a p-value of < 0.05, the p-value is still significantly higher than those of 'X1' to 'X5'. The coefficient estimate of 'AGE' is also very small (0.010321) as compared to 'X1' to 'X5' coefficients, which suggests it has the smallest impact on the outcome amongst the statistically significant coefficients. 
+
+On the other hand for GENDER/WTYPE, they are not statistically significant at all due to their p-values > 0.05. Logically, this makes sense as well because the survey data of these two coefficients is not related to the satisfaction levels.
+
+This linear model indicates that it has a good fit based on the relatively high R-squared value of '0.8389'.
+
+From the cor() output, we can also infer that ‘X3’ has the highest correlation coefficient of  0.9129154 to the outcome variable ‘Y’.
+
+
+# Plotting visualisation
+```{r}
+# List of column names you want to count values in
+columns_to_count <- c("X1", "X2", "X3", "X4", "X5")
+
+# Create an empty data frame to store the results
+results <- data.frame(Column = character(0), Value = character(0), Count = numeric(0))
+
+# Loop through the columns
+for (col_name in columns_to_count) {
+  value_counts <- table(dataframe[[col_name]])
+  max_count_index <- which.max(value_counts)
+  max_value <- names(value_counts)[max_count_index]
+  max_count <- value_counts[max_count_index]
+  
+  result <- data.frame(Column = col_name, Value = max_value, Count = max_count)
+  results <- rbind(results, result)
+}
+
+# Display the results
+View(results)
+```
+
+## Creating the plot
+```{r}
+# Create a bar plot without default x-axis labels
+# xaxt='n' removes the default axis so that a custom x-axis with labels can be added
+# axes = FALSE remove the top and right borders while keeping the y-axis
+plot(results$Count ~ seq_along(results$Column), type = "h", lwd = 10 ,col = "blue", xlab = "Field Names", ylab = "Count" , xaxt = "n", ylim=c(8900,9600), axes=FALSE)
+
+# Adding main and sub titles
+title(main = "Performance Impact Chart\nNumber of excellent (5) ratings for X1 to X5", line = 1, cex.main = 1)
+
+# Add custom x-axis labels
+axis(1, at = seq_along(results$Column), labels = results$Column)
+
+# Set las to '2' for vertical y-axis labels
+# the first argument '2' refers to the y-axis in this case
+axis(2, tick = TRUE, las = 2)  # Adjust the second value in mgp for increased spacing
+
+# Add labels on top of each bar
+text(seq_along(results$Column), results$Count, labels = results$Count, pos = ifelse(results$Count > 0, 3, 1), cex = 0.8, col = "red")
+
+```
