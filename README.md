@@ -7,6 +7,8 @@ Analyse the last 12 months of patient survey data in the patient experience depa
 3) Input 'NULL' as the value to replace missing/non-valid values
 4) Further read the SQL data into R for linear regression analysis and visualization analysis
 
+## Python: Combining data from multiple sources and creating connection to MySQL database
+
 Combining selected sheets from each of the 12 excel files 
 Created a connection to MySQL database and imported the raw data into Tableplus
 Created 12 custom table names for the respective imported excel files
