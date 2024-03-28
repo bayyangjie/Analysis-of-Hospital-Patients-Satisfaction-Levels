@@ -7,8 +7,9 @@ Analyse the last 12 months of patient survey data in the patient experience depa
 3) Input 'NULL' as the value to replace missing/non-valid values
 4) Further read the SQL data into R for linear regression analysis and visualization analysis
 
-Combining only the sheets with specific labels from the 12 separate excel files. 
-Created a connection to MySQL and imported the raw data from the 12 excel files with their respective sheets into a separate set of 12 tables in Tableplus.
+Combining selected sheets from each of the 12 excel files 
+Created a connection to MySQL database and imported the raw data into Tableplus
+Created 12 custom table names for the respective imported excel files
 ```
 # Create a list of the different file paths where the excel sheets are stored
 file_paths = ['/Users/ASUS/Desktop/raw/Jan.xlsx',
@@ -53,7 +54,7 @@ for file_path, sheet_name, custom_table_name in zip(file_paths, sheet_names, cus
     data.to_sql(custom_table_name, con=engine, if_exists="replace", index=False)
 ```
 
-Combined the data from all the 12 imported tables under a new table
+Combined the data from all the 12 imported tables under a new table:
 ```
 CREATE TABLE doc_survey (
 X1 INT,
@@ -101,7 +102,7 @@ FROM doc_survey
 WHERE (X1 IS NULL OR X2 IS NULL OR X3 IS NULL OR X4 IS NULL OR X5 IS NULL OR Y IS NULL OR AGE IS NULL OR GENDER IS NULL OR WTYPE IS NULL)
 ```
 
-Checking if each column contains invalid values
+Checking if each column contains invalid values:
 ```
 SELECT *
 FROM doc_survey
@@ -117,7 +118,7 @@ WHERE
   OR WTYPE NOT IN ('1','2','3','4')
 ```
 
-Updating the table to replace the empty/invalid values with NULL input
+Updating the table to replace the empty/invalid values with NULL input:
 ```
 UPDATE doc_survey
 SET
@@ -126,7 +127,7 @@ SET
   WTYPE = CASE WHEN WTYPE IS NULL OR WTYPE='99' THEN NULL ELSE WTYPE END;
 ```
 
-### Linear regression and visualization analysis using R
+### R - Linear regression and visualization plots
 
 Establishing connection between R and MySQL database and reading in the dataframe:
 ```
