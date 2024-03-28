@@ -9,9 +9,7 @@ Analyse the last 12 months of patient survey data in the patient experience depa
 
 ### Python: Combining data from multiple sources and creating connection to MySQL database
 
-Combining selected sheets from each of the 12 excel files <br>
-Created a connection to MySQL database and imported the raw data into Tableplus <br>
-Created 12 custom table names for the respective imported excel files
+Combining selected sheets from each of the 12 excel files:
 ```
 # Create a list of the different file paths where the excel sheets are stored
 file_paths = ['/Users/ASUS/Desktop/raw/Jan.xlsx',
@@ -28,11 +26,16 @@ file_paths = ['/Users/ASUS/Desktop/raw/Jan.xlsx',
                '/Users/ASUS/Desktop/raw/Dec.xlsx']
 
 sheet_names=['INPATIENT','ip','INP','WARDED','IN','warded','IN','WARDED','in','IN','InP','Inpatient']
-
+```
+Created a connection to MySQL database and imported the raw data into Tableplus:
+```
 # Create a MySQL connection
 engine = create_engine(db_uri)
+```
 
-# Create a list of custom table names
+Created 12 custom table names to feed in the 12 respective excel files after importing:
+```
+# Create a list of custom tables names
 custom_table_names = [
     "in01",
     "in02",
@@ -47,8 +50,11 @@ custom_table_names = [
     "in11",
     "in12"
 ]
+```
 
-# Iterate through the three lists using zip
+Iterating through the three lists created:
+```
+# Iterate through the 3 lists using zip
 for file_path, sheet_name, custom_table_name in zip(file_paths, sheet_names, custom_table_names):
     # Read data from the Excel sheet
     data = pd.read_excel(file_path, sheet_name=sheet_name) 
