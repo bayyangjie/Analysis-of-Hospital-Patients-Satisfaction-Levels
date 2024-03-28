@@ -9,8 +9,8 @@ Analyse the last 12 months of patient survey data in the patient experience depa
 
 ### Python: Combining data from multiple sources and creating connection to MySQL database
 
-Combining selected sheets from each of the 12 excel files 
-Created a connection to MySQL database and imported the raw data into Tableplus
+Combining selected sheets from each of the 12 excel files <br>
+Created a connection to MySQL database and imported the raw data into Tableplus <br>
 Created 12 custom table names for the respective imported excel files
 ```
 # Create a list of the different file paths where the excel sheets are stored
