@@ -1,5 +1,5 @@
 ## Project Objectives
-Analyse the last 12 months of patient survey data in the patient experience department of a hospital. The dataset is stored in twelve separate Microsoft Excel documents, one per calendar month. 
+Analyse the last 12 months of patient survey data in the patient experience department of a hospital. The dataset is stored in twelve separate Microsoft Excel documents, one per calendar month.<br>
 Connect various platforms to move around the data. 
  
 
