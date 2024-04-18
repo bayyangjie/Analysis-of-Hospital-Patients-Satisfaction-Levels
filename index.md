@@ -160,16 +160,26 @@ summary(lm_sat)
 
 Based on the lm() output, we can infer that coefficients "X1" to "X5" are the most statistically significant and can potentially impact the outcome variable "Y" the most. This can be seen from the *** sign of all 5 coefficients. Additionally, the p-values of all 5 coefficients are < 0.05, which represents statistical significance.
 
-In terms of the coefficient estimate values, we can see that 'X3' has the most impact on the outcome variable since it has the highest coefficient estimate value of 0.373128. 
+In terms of the coefficient estimate values, we can see that 'X3' has the most impact on the outcome variable since it has the highest coefficient estimate value of 0.373128. This means that for every increase in rating of X3, the overall satisfaction rating improves by 0.373128.
 
-This means that for every increase in rating of X3, the overall satisfaction rating improves by 0.373128.
-
-Regarding 'AGE' coefficient, it has a very low statistical significance as seen by the presence of one * . Although it has a p-value of < 0.05, the p-value is still significantly higher than those of 'X1' to 'X5'. The coefficient estimate of 'AGE' is also very small (0.010321) as compared to 'X1' to 'X5' coefficients, which suggests it has the smallest impact on the outcome amongst the statistically significant coefficients. 
+Regarding 'AGE' coefficient, it has a very low statistical significance as seen by the presence of one asterisk '*' symbol. Despite a p-value of < 0.05, the p-value is still significantly higher than those of 'X1' to 'X5'. The coefficient estimate of 'AGE' is also very small (0.010321) as compared to 'X1' to 'X5' coefficients, which suggests it has the smallest impact on the outcome amongst the statistically significant coefficients. 
 
 On the other hand for GENDER/WTYPE, they are not statistically significant at all due to their p-values > 0.05. Logically, this makes sense as well because the survey data of these two coefficients is not related to the satisfaction levels.
 
-
-
-
-
-
+Checking correlation level between outcome variable and each independent variable
+```
+cor(dataframe$X1 , dataframe$Y) 
+cor(dataframe$X2 , dataframe$Y) 
+cor(dataframe$X3 , dataframe$Y) 
+cor(dataframe$X4 , dataframe$Y) 
+cor(dataframe$X5 , dataframe$Y) 
+cor(dataframe$AGE , dataframe$Y) 
+``
+[1] 0.8652688
+[1] 0.8915433
+[1] 0.9129154
+[1] 0.8973897
+[1] 0.9105011
+[1] NA
+```
+From the cor() output, we can also infer that ‘X3’ has the highest correlation coefficient of  0.9129154 to the outcome variable ‘Y’.
