@@ -182,4 +182,4 @@ cor(dataframe$AGE , dataframe$Y)
 [1] 0.9105011
 [1] NA
 ```
-From the cor() output, we can also infer that ‘X3’ has the highest correlation coefficient of  0.9129154 to the outcome variable ‘Y’.
+From the correlation output, we can also see that ‘X3’ has the highest correlation coefficient of 0.9129154 which further supports that it has the most impact on the outcome variable ‘Y’.
