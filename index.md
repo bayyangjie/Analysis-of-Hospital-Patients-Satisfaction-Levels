@@ -142,7 +142,7 @@ SET
 ```
 <br>
 
-### R - Linear regression and visualization plots
+### R - Linear regression
 
 Establishing connection between R and MySQL database and reading in the dataframe:
 ```
