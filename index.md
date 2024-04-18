@@ -166,6 +166,7 @@ Regarding 'AGE' coefficient, it has a very low statistical significance as seen 
 
 On the other hand for GENDER/WTYPE, they are not statistically significant at all due to their p-values > 0.05. Logically, this makes sense as well because the survey data of these two coefficients is not related to the satisfaction levels.
 
+
 Checking correlation level between outcome variable and each independent variable
 ```
 cor(dataframe$X1 , dataframe$Y) 
