@@ -103,7 +103,7 @@ SELECT * FROM in12;
 ```
 <br>
 
-### Data cleaning
+## Data cleaning
 
 Checking for NULL values:
 ```
