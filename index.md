@@ -1,6 +1,6 @@
 ## Project Objectives
-- Analyse the last 12 months of patient survey data in the patient experience department of a hospital. <br>
-- Dataset contains total of 10 excel files with each file containing multiple sheets 
+- Analyse the last 12 months of patient survey data in the patient experience department of a hospital.
+- Dataset is a set of twelve excel files with each file containing multiple sheets. Each file corresponds to each month in the year.
 - Assemble a data flow by creating a single python program that reads in specific sheets in each of the twelve excel documents and upload them into MySQL database
 - Construct a single MySQL query to create a table that contains the required sheets from the twelve excel documents with each field name in the tbale following specified naming conventions
 - Perform the necessary data cleaning/processing on the data in MySQL table
