@@ -164,8 +164,8 @@ In terms of the coefficient estimate values, we can see that 'X3' has the most i
 
 Regarding 'AGE' coefficient, it has a very low statistical significance as seen by the presence of one asterisk '*' symbol. Despite a p-value of < 0.05, the p-value is still significantly higher than those of 'X1' to 'X5'. The coefficient estimate of 'AGE' is also very small (0.010321) as compared to 'X1' to 'X5' coefficients, which suggests it has the smallest impact on the outcome amongst the statistically significant coefficients. 
 
-On the other hand for GENDER/WTYPE, they are not statistically significant at all due to their p-values > 0.05. Logically, this makes sense as well because the survey data of these two coefficients is not related to the satisfaction levels.
-<br>
+On the other hand for GENDER/WTYPE, they are not statistically significant at all due to their p-values > 0.05. Logically, this makes sense as well because the survey data of these two coefficients is not related to the satisfaction levels. <br> <br>
+
 Checking correlation level between outcome variable and each independent variable
 ```
 cor(dataframe$X1 , dataframe$Y) 
