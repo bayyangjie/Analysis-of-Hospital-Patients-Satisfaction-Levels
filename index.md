@@ -161,6 +161,7 @@ summary(lm_sat)
 Based on the lm() output, we can infer that coefficients "X1" to "X5" are the most statistically significant and can potentially impact the outcome variable "Y" the most. This can be seen from the *** sign of all 5 coefficients. Additionally, the p-values of all 5 coefficients are < 0.05, which represents statistical significance.
 
 In terms of the coefficient estimate values, we can see that 'X3' has the most impact on the outcome variable since it has the highest coefficient estimate value of 0.373128. 
+
 This means that for every increase in rating of X3, the overall satisfaction rating improves by 0.373128.
 
 Regarding 'AGE' coefficient, it has a very low statistical significance as seen by the presence of one * . Although it has a p-value of < 0.05, the p-value is still significantly higher than those of 'X1' to 'X5'. The coefficient estimate of 'AGE' is also very small (0.010321) as compared to 'X1' to 'X5' coefficients, which suggests it has the smallest impact on the outcome amongst the statistically significant coefficients. 
