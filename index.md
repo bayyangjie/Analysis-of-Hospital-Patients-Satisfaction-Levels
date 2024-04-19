@@ -209,5 +209,57 @@ text(seq_along(results$Column), results$Count, labels = results$Count, pos = ife
 
 Based on the performance-impact bar plot shown below, it shows that warded patients have rated their doctors very highly with an 'excellent' rating of '5' in terms of performance areas of respectfulness(X1), competency(X2), empathy(X3), listens well(X4), explains and update well(X5). The 'Good' rating '4' is the next highest in each performance area. Both of these ratings also form the bulk of ratings as compared to the other rating levels of 1,2,3,4,99. Thus, this suggests that patients have had a good overall impression of doctors in the hospital when they were warded. 
 
+```{r, fig.width=22, fig.height=12}
+# Define data
+data <- data.frame(
+  X1 = c(20, 31, 748, 6544, 9475, 890),
+  X2 = c(18, 38, 787, 6477, 9381, 1007),
+  X3 = c(34, 52, 918, 6570, 9185, 949),
+  X4 = c(36, 72, 976, 6682, 8910, 1032),
+  X5 = c(37, 69, 992, 6638, 8976, 996)
+)
+
+# Define colors for each row label
+colors <- c("red", "green", "blue", "orange", "purple" , "grey")
+
+# Set plot margins
+par(mar = c(5, 5, 4, 2) + 0.1)
+
+# Plot
+plot(1, type = "n", xlim = c(0.5, ncol(data) + 0.5), ylim = c(0, max(data)), ylab = "Count", main = "Counts of distinct ratings for each field name" , xaxt = "n" , cex.lab = 1.8 , cex.axis = 1.5 , cex.main = 1.9)
+
+# Loop through each column
+for (i in 1:ncol(data)) {
+  # Get counts for the current column
+  counts <- data[, i]
+  
+  # Calculate the number of bars to plot
+  num_bars <- length(counts)
+  
+  # Calculate the width of each bar
+  bar_width <- 0.8 / num_bars  # Adjust width as needed
+  
+  # Calculate the x-positions for the bars
+  x_positions <- i - 0.4 + (1:num_bars) * bar_width
+  
+  # Plot bars for each value in the current column
+  for (j in 1:num_bars) {
+    bar_height <- counts[j]
+    rect(x_positions[j], 0, x_positions[j] + bar_width, bar_height, col = colors[j], border = "black")
+    text(x_positions[j] + bar_width / 2, bar_height, labels = counts[j], pos = 3, cex = 1.4)
+  }
+}
+
+# Add x-axis labels as column names
+# The 'cex.axis' argument here adjusts the text size of the x-axis tick mark labels separately
+axis(1, at = 1:ncol(data), labels = paste0("X", 1:ncol(data)), cex.axis = 1.5)  
+
+# Define legend labels
+legend_labels <- c("1", "2", "3", "4", "5", "99")
+
+# Add legend with adjusted position and custom labels
+legend("topleft", legend = legend_labels, fill = colors, bg = "white", cex = 1.4)
+```
+
 ![r_plot](https://github.com/bayyangjie/Data-Wrangling/assets/153354426/5de4c741-13ef-40d2-8bf0-c213dcfca6b1)
 
