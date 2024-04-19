@@ -184,7 +184,7 @@ cor(dataframe$AGE , dataframe$Y)
 ```
 From the correlation output, we can also see that ‘X3’ has the highest correlation coefficient of 0.9129154 which further supports that it has the most impact on the outcome variable ‘Y’.
 
-## R - Performance-impact visualisation bar chart
+## R - Performance-impact bar chart
 
 Based on the performance-impact bar plot shown below, it shows that warded patients have rated their doctors very highly with an 'excellent' rating of '5' in terms of performance areas of respectfulness(X1), competency(X2), empathy(X3), listens well(X4), explains and update well(X5). The 'Good' rating '4' is the next highest in each performance area. Both of these ratings also form the bulk of ratings as compared to the other rating levels of 1,2,3,4,99. Thus, this suggests that patients have had a good overall impression of doctors in the hospital when they were warded. 
 
