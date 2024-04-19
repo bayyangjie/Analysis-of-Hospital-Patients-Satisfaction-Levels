@@ -142,7 +142,7 @@ SET
 ```
 <br>
 
-## R - Linear regression/Visual plot
+## R - Linear regression
 
 Establishing connection between R and MySQL database and reading in the dataframe:
 ```
@@ -184,28 +184,7 @@ cor(dataframe$AGE , dataframe$Y)
 ```
 From the correlation output, we can also see that ‘X3’ has the highest correlation coefficient of 0.9129154 which further supports that it has the most impact on the outcome variable ‘Y’.
 
-Performance impact bar plot visualisation
-```
-# Create a bar plot without default x-axis labels
-# xaxt='n' removes the default axis so that a custom x-axis with labels can be added
-# axes = FALSE remove the top and right borders while keeping the y-axis
-plot(results$Count ~ seq_along(results$Column), type = "h", lwd = 10 ,col = "blue", xlab = "Field Names", ylab = "Count" , xaxt = "n", ylim=c(8900,9600), axes=FALSE)
-
-# Adding main and sub titles
-title(main = "Performance Impact Chart\nNumber of excellent (5) ratings for X1 to X5", line = 1, cex.main = 1)
-
-# Add custom x-axis labels
-axis(1, at = seq_along(results$Column), labels = results$Column)
-
-# axis(2, ...) specifies that you're customizing the y-axis
-# las = 2 specifies the orientation of the labels on the y-axis. In this case, las = 2 indicates vertical orientation
-# tick = TRUE specifies that you want to display tick marks on the y-axis. By default, tick is set to TRUE.
-axis(2, tick = TRUE, las = 2)  
-
-# Add labels on top of each bar
-text(seq_along(results$Column), results$Count, labels = results$Count, pos = ifelse(results$Count > 0, 3, 1), cex = 0.8, col = "red")
-```
-![R_performance_impact_plot](https://github.com/bayyangjie/Data-Wrangling/assets/153354426/13e167e2-5fb2-4286-bfa7-f91db9fbe9e1)
+## R - Performance-impact visualisation bar chart
 
 Based on the performance-impact bar plot shown below, it shows that warded patients have rated their doctors very highly with an 'excellent' rating of '5' in terms of performance areas of respectfulness(X1), competency(X2), empathy(X3), listens well(X4), explains and update well(X5). The 'Good' rating '4' is the next highest in each performance area. Both of these ratings also form the bulk of ratings as compared to the other rating levels of 1,2,3,4,99. Thus, this suggests that patients have had a good overall impression of doctors in the hospital when they were warded. 
 
