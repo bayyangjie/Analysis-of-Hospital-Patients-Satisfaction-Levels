@@ -210,7 +210,7 @@ text(seq_along(results$Column), results$Count, labels = results$Count, pos = ife
 Based on the performance-impact bar plot shown below, it shows that warded patients have rated their doctors very highly with an 'excellent' rating of '5' in terms of performance areas of respectfulness(X1), competency(X2), empathy(X3), listens well(X4), explains and update well(X5). The 'Good' rating '4' is the next highest in each performance area. Both of these ratings also form the bulk of ratings as compared to the other rating levels of 1,2,3,4,99. Thus, this suggests that patients have had a good overall impression of doctors in the hospital when they were warded. 
 
 ```{r, fig.width=22, fig.height=12}
-# The plot's size can be increased at the chunk level (i.e indicate within {r, } at the start of the code chunk as shown above)
+# The plot's size can be increased at the chunk level (i.e "{r, fig.width=22, fig.height=12}" at the start of the code chunk)
 
 # Define data
 data <- data.frame(
