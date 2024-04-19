@@ -210,6 +210,8 @@ text(seq_along(results$Column), results$Count, labels = results$Count, pos = ife
 Based on the performance-impact bar plot shown below, it shows that warded patients have rated their doctors very highly with an 'excellent' rating of '5' in terms of performance areas of respectfulness(X1), competency(X2), empathy(X3), listens well(X4), explains and update well(X5). The 'Good' rating '4' is the next highest in each performance area. Both of these ratings also form the bulk of ratings as compared to the other rating levels of 1,2,3,4,99. Thus, this suggests that patients have had a good overall impression of doctors in the hospital when they were warded. 
 
 ```{r, fig.width=22, fig.height=12}
+# The plot's size can be increased at the chunk level (i.e indicate within {r, } at the start of the code chunk as shown above)
+
 # Define data
 data <- data.frame(
   X1 = c(20, 31, 748, 6544, 9475, 890),
@@ -225,27 +227,34 @@ colors <- c("red", "green", "blue", "orange", "purple" , "grey")
 # Set plot margins
 par(mar = c(5, 5, 4, 2) + 0.1)
 
-# Plot
+# Plot 
+# xlim: since we are using string values on the x-axis, the xlim parameter here adjusts the position of the bars along x-axis instead of setting the numerical limits of the x-axis as it would with numerical values
+# ylim: max(data) here will compute the maximum value across all elements in the 'data' dataframe based on the rows/columns
 plot(1, type = "n", xlim = c(0.5, ncol(data) + 0.5), ylim = c(0, max(data)), ylab = "Count", main = "Counts of distinct ratings for each field name" , xaxt = "n" , cex.lab = 1.8 , cex.axis = 1.5 , cex.main = 1.9)
 
-# Loop through each column
+# Loop through each main bar
 for (i in 1:ncol(data)) {
   # Get counts for the current column
   counts <- data[, i]
   
-  # Calculate the number of bars to plot
+  # Calculate the number of bars to plot for each main bar
   num_bars <- length(counts)
   
-  # Calculate the width of each bar
+  # Calculate the width of each bar within each cluster
   bar_width <- 0.8 / num_bars  # Adjust width as needed
   
   # Calculate the x-positions for the bars
+  # x_positions represent the starting point of each cluster of sub-bars within each main bar(i.e X1 to X5)
   x_positions <- i - 0.4 + (1:num_bars) * bar_width
   
   # Plot bars for each value in the current column
-  for (j in 1:num_bars) {
-    bar_height <- counts[j]
-    rect(x_positions[j], 0, x_positions[j] + bar_width, bar_height, col = colors[j], border = "black")
+  # '1:num_bars' represents the 6 sub-bars under each cluster
+  # Loop through each sub bar AFTER looping through each main bar
+  for (j in 1:num_bars) { 
+    bar_height <- counts[j] # 'counts' represent the set of 6 values in each main bar
+    rect(x_positions[j], 0, x_positions[j] + bar_width, bar_height, col = colors[j], border = "black") 
+    # 'x_positions[j]' represents the starting position of the first sub-bar under each main bar/cluster
+    # 'x_positions[j] + bar_width' specifies the starting position of the second sub-bar/ending position of the first sub-bar
     text(x_positions[j] + bar_width / 2, bar_height, labels = counts[j], pos = 3, cex = 1.4)
   }
 }
