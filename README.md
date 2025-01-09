@@ -9,7 +9,7 @@ R - Visualisation and Linear regression <br>
 https://github.com/bayyangjie/Data-Wrangling/blob/main/RMarkdown%20file
 
 # About the data
-* The timeline for the data used is from the latest 12 months and it is stored in twelve separate microsoft excel documents, one per calendar month. 
+* The timeline for the data used is over a period of 12 months and it is stored in twelve separate microsoft excel documents, one per calendar month. 
 * Each column in the excel files represent different quality metrics that are measured, for example overall satisfaction, level of empathy, doctor competency etc. 
 * Each metric also has different rating levels. For example, the metric "respectful" has ratings from 1 to 5 and 99 (1:Very Poor to 5:Excellent, and 99:NA which refers to no response recorded)
 
