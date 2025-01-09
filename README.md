@@ -39,7 +39,7 @@ In terms of the coefficient estimate values, we can see that 'X3' (level of empa
 ![image](https://github.com/user-attachments/assets/862cd7d6-76e9-41f1-b412-4f3301f5a96a) <br> <br>
 
 ### Barplot visualisation <br>
-The barplot is a performance-impact chart that shows the count of how well the doctors have fared in the measurement metrics X1 to X5. These were the only metrics used since the regression model has shown them to be the most impactful on the response variable. This plots provides a deeper level of insights as to how well doctors have fared in each of the performance metrics. Based on the bar plot visualisation, it shows that patients are overall very satisfied with the service provided by doctors as shown by '5' being 'Excellent' having the highest count for all five metrics.
+The barplot is a performance-impact chart that shows the count of how well the doctors have fared in the measurement metrics X1 to X5. These were the only metrics used since the regression model has shown them to be the most impactful on the response variable. This plots provides a deeper level of insights as to how well doctors have fared in each of the performance metrics. Based on the bar plot visualisation, it shows that patients are overall very satisfied with the service provided by doctors as shown by the best ratings of 5 and 4 both having the highest total counts for each of the five ratings from X1 to X5.
 
 ![image](https://github.com/user-attachments/assets/71933a57-73c9-4f48-b34a-98f2abb7e644)
 
