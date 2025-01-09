@@ -1,12 +1,18 @@
 # Patient Experience Survey 
 The objective of this project is to analyse the latest 12 months of patient survey data regarding the quality of service and medical treatment provided by the doctors. <br>
 
-**View the full code here**: <br>
-Python - Establishing connection to MySQL <br>
+**Code files**: <br>
+Python 
+* Establishing connection to MySQL <br>
 https://github.com/bayyangjie/Data-Wrangling/blob/main/Python%20file <br>
 
-R - Visualisation and Linear regression <br>
-https://github.com/bayyangjie/Data-Wrangling/blob/main/RMarkdown%20file
+SQL
+* Merging the datasets and manipulating the merged database <br>
+https://github.com/bayyangjie/Data-Wrangling/blob/main/SQL%20codes.sql <br>
+
+R 
+* Visualisation and Linear regression <br>
+https://github.com/bayyangjie/Data-Wrangling/blob/main/RMarkdown%20file <br>
 
 # About the data
 * The timeline for the data used is over a period of 12 months and it is stored in twelve separate microsoft excel documents, one per calendar month. 
