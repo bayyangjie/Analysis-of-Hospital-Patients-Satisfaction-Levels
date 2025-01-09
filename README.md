@@ -5,7 +5,7 @@ The objective of this project is to analyse the latest 12 months of patient surv
 Python - Establishing connection to MySQL: <br>
 https://github.com/bayyangjie/Data-Wrangling/blob/main/Python%20file <br>
 
-R - Linear regression and barplot visualisation<br>
+R - Linear regression and Visualisation<br>
 https://github.com/bayyangjie/Data-Wrangling/blob/main/RMarkdown%20file
 
 # About the data
