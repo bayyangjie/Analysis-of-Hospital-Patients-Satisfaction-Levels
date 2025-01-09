@@ -2,11 +2,11 @@
 The objective of this project is to analyse the latest 12 months of patient survey data regarding the quality of service and medical treatment provided by the doctors. <br>
 
 **View the full code here**: <br>
-[Python code] <br>
-MySQL connection: https://github.com/bayyangjie/Data-Wrangling/blob/main/Python%20file <br> <br>
+Python for establishing connection to MySQL: <br>
+https://github.com/bayyangjie/Data-Wrangling/blob/main/Python%20file <br> <br>
 
-[R code] <br>
-Linear regression and performance-impact barplot: https://github.com/bayyangjie/Data-Wrangling/blob/main/RMarkdown%20file
+R code for linear regression and barplot visualisation<br>
+https://github.com/bayyangjie/Data-Wrangling/blob/main/RMarkdown%20file
 
 # About the data
 * The timeline for the data used is from the latest 12 months and it is stored in twelve separate microsoft excel documents, one per calendar month. 
