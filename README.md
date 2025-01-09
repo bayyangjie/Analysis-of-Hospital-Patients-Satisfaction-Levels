@@ -28,10 +28,8 @@ https://github.com/bayyangjie/Data-Wrangling/blob/main/RMarkdown%20file <br>
 ## Data pipeline creation
 In this project, I assembled a data flow by creating a single Python program that reads in all the twelve datasets into the MySQL database. Tableplus was the database management tool used in this case. Once the datasets were imported into MySQL, I renamed each table which represents the different months with a different name. Using MySQL, I then constructed a query to create a new table that combined the data from all the twelve datasets. The data types of the column variables are then verified to ensure that they are correct. 
 
-## R code analysis
+## Visualisation and Regression
 After the data had been preprocessed in Tableplus, it was then imported into R for running a **linear regression model** as well as generating a **performance-impact bar plot**. The purpose of running a linear regression model was to evaluate which measurement metrics were the most influential to the response variable, overall patient satisfaction. The model result showed that the level of empathy that the doctor shows to the patient would have the greatest impact on the patient's overall satisfaction. On the other hand, the patient's age has the least impact on the overall patient satisfaction. At the same time, the model results also identified metrics/variables that were statistically insignificant to the response variable's outcome due to having p-values < 0.05.
-
-# 
 
 
 
