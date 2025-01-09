@@ -6,7 +6,7 @@ The objective of this project is to analyse the latest 12 months of patient surv
 MySQL connection: https://github.com/bayyangjie/Data-Wrangling/blob/main/Python%20file <br> <br>
 
 [R code]:
-Linear regression and performance-impact chart barplot: https://github.com/bayyangjie/Data-Wrangling/blob/main/RMarkdown%20file
+Linear regression and performance-impact barplot: https://github.com/bayyangjie/Data-Wrangling/blob/main/RMarkdown%20file
 
 # About the data
 * The timeline for the data used is from the latest 12 months and it is stored in twelve separate microsoft excel documents, one per calendar month. 
