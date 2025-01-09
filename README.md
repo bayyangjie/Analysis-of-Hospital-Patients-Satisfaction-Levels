@@ -33,7 +33,7 @@ After the data had been preprocessed in Tableplus, it was then imported into R f
 
 Regression results: <br>
 
-![image](https://github.com/user-attachments/assets/862cd7d6-76e9-41f1-b412-4f3301f5a96a)
+![image](https://github.com/user-attachments/assets/862cd7d6-76e9-41f1-b412-4f3301f5a96a) <br>
 
 Performance-impact bar plot: <br>
 
