@@ -2,10 +2,10 @@
 The objective of this project is to analyse the latest 12 months of patient survey data regarding the quality of service and medical treatment provided by the doctors. <br>
 
 **View the full code here**: <br>
-[Python code] 
+[Python code] <br>
 MySQL connection: https://github.com/bayyangjie/Data-Wrangling/blob/main/Python%20file <br> <br>
 
-[R code]:
+[R code] <br>
 Linear regression and performance-impact barplot: https://github.com/bayyangjie/Data-Wrangling/blob/main/RMarkdown%20file
 
 # About the data
