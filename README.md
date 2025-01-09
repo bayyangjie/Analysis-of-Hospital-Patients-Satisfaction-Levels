@@ -31,14 +31,14 @@ In this project, I assembled a data flow by creating a single Python program tha
 ## Visualisation and Regression
 After the data had been preprocessed in Tableplus, it was then imported into R for running a **linear regression model** as well as generating a **performance-impact bar plot**. The purpose of running a linear regression model was to evaluate which measurement metrics were the most influential to the response variable. <br>
 
-* Regression
+* Regression <br>
 Based on the lm() output, we can quickly infer that coefficients "X1" to "X5" are the most statistically significant and can potentially impact the response variable "Y" (overall patient satisfaction) the most. This can be seen from the *** sign of all 5 coefficients. Additionally, the p-values of all 5 coefficients are < 0.05, which represents statistical significance.
 
 In terms of the coefficient estimate values, we can see that 'X3' (level of empathy by doctor) has the most impact on the outcome variable since it has the highest coefficient estimate value of 0.373128. This means that for every increase in rating of X3, the overall satisfaction rating improves by 0.373128.
 
 ![image](https://github.com/user-attachments/assets/862cd7d6-76e9-41f1-b412-4f3301f5a96a) <br> <br>
 
-* Barplot visualisation
+* Barplot visualisation <br>
 The barplot is a performance-impact chart that shows the count of how well the doctors have fared in the measurement metrics X1 to X5. These were the only metrics used since the regression model has shown them to be the most impactful on the response variable. This plots provides a deeper level of insights as to how well doctors have fared in each of the performance metrics. Based on the bar plot visualisation, it shows that patients are overall very satisfied with the service provided by doctors as shown by '5' being 'Excellent' having the highest count for all five metrics.
 
 ![image](https://github.com/user-attachments/assets/71933a57-73c9-4f48-b34a-98f2abb7e644)
