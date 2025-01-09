@@ -2,7 +2,7 @@
 The objective of this project is to analyse the latest 12 months of patient survey data regarding the quality of service and medical treatment provided by the doctors. <br>
 
 **View the full code here**: <br>
-Python - Establishing connection to MySQL: <br>
+Python - Establishing connection to MySQL <br>
 https://github.com/bayyangjie/Data-Wrangling/blob/main/Python%20file <br>
 
 R - Visualisation and Linear regression <br>
