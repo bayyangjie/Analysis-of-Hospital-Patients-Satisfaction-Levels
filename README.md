@@ -16,8 +16,7 @@ https://github.com/bayyangjie/Data-Wrangling/blob/main/RMarkdown%20file
 # Software tools used
 * Rstudio
 * Tableplus
-
-
+* VSCode
 
 # About the project
 ## Data pipeline creation
