@@ -31,5 +31,10 @@ In this project, I assembled a data flow by creating a single Python program tha
 ## Visualisation and Regression
 After the data had been preprocessed in Tableplus, it was then imported into R for running a **linear regression model** as well as generating a **performance-impact bar plot**. The purpose of running a linear regression model was to evaluate which measurement metrics were the most influential to the response variable, overall patient satisfaction. The model result showed that the level of empathy that the doctor shows to the patient would have the greatest impact on the patient's overall satisfaction. On the other hand, the patient's age has the least impact on the overall patient satisfaction. At the same time, the model results also identified metrics/variables that were statistically insignificant to the response variable's outcome due to having p-values < 0.05.
 
+![image](https://github.com/user-attachments/assets/862cd7d6-76e9-41f1-b412-4f3301f5a96a)
+
+![image](https://github.com/user-attachments/assets/71933a57-73c9-4f48-b34a-98f2abb7e644)
+
+
 
 
