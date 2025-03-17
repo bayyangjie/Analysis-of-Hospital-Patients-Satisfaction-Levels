@@ -10,8 +10,6 @@ This project analyse the latest 12 months of patient survey data regarding the q
 * Tableplus
 * VSCode
 
-<br>
-
 # Data pipeline creation
 
 ## Setting up connection to SQL server
@@ -68,15 +66,13 @@ for file_path, sheet_name, custom_table_name in zip(file_paths, sheet_names, cus
 ## Inserting data into SQL table
 Once the loop is completed, the 12 tables are created in the SQL database server and each populated with data only from the selected spreadsheets ('Inpatient', 'ip', 'warded', 'inp' and 'ip').
 
-<img src="https://github.com/bayyangjie/Patient-Experience-Study/blob/main/Images/tableplus_in01_in12.png?raw=true" width="30%">
+<img src="https://github.com/bayyangjie/Patient-Experience-Study/blob/main/Images/tableplus_in01_in12.png?raw=true" width="25%">
 
 <br>
 
 # Data Cleaning
-Prior to combining the tables with UNION, each table was first checked for data quality issues such as additional unknown columns and table 'in02' was found to contain many additional columns under the label 'Unnamed:' that contained null values.
-<img src="https://github.com/bayyangjie/Patient-Experience-Study/blob/main/Images/unknown_nulls_columns.png?raw=true" width="50%">
+Prior to merging the tables, each table was first checked for data quality issues such as additional unknown columns and table 'in02' was found to contain many additional columns under the label 'Unnamed: ' and containing null values. Those columns were then dropped using ALTER TABLE and DROP functions.
 
-Table 'in02' was discovered to have additional columns that were irrelevant and those columns had to be dropped using ALTER TABLE and DROP.
 ```SQL
 # Verify each table to check for data inconsistencies
 SELECT COLUMN_NAME
@@ -87,15 +83,29 @@ AND COLUMN_NAME NOT IN (
     FROM in02
     WHERE COLUMN_NAME IS NOT NULL
 );
+```
+<br>
 
-# Return the list of string outputs that indicate the column headers named 'Unnamed:' with purely NULL values in the table 'in02'
+Table 'in02' with the additional unknown columns with the label 'Unnamed: ":
+
+<img src="https://github.com/bayyangjie/Patient-Experience-Study/blob/main/Images/in02_unknown_columns.png?raw=true" width="100%">
+
+<br>
+
+Return the list of string outputs that indicate the column headers named 'Unnamed:' with purely NULL values in the table 'in02'
+
+```SQL
 SELECT CONCAT('ALTER TABLE in02 DROP COLUMN `', COLUMN_NAME, '`;')
 FROM INFORMATION_SCHEMA.COLUMNS	   -- contains metadata about the columns inside table 'in02' within database 'ANL503_ECA'
 WHERE TABLE_NAME = 'in02'		   -- filters the results to only columns that belong to the in02 table.
 AND TABLE_SCHEMA = 'ANL503_ECA'		
 AND COLUMN_NAME LIKE 'Unnamed:%';  -- includes columns where the name starts with 'Unnamed:'
+```
+<br>
 
-# Executing ALTER TABLE commands of columns with all NULL values in table 'in02'
+Executing ALTER TABLE commands of columns with all NULL values in table 'in02'
+
+```SQL
 ALTER TABLE in02 DROP COLUMN `Unnamed: 9`;
 ALTER TABLE in02 DROP COLUMN `Unnamed: 10`;
 ALTER TABLE in02 DROP COLUMN `Unnamed: 11`;
@@ -131,7 +141,8 @@ ALTER TABLE in02 DROP COLUMN `Unnamed: 39`;
 
 <br>
 
-A custom table 'doc_survey' is created in the SQL server that will store the combined data of all 12 tables.
+A custom table 'doc_survey' is created in the SQL server that will store the combined data of all 12 tables
+
 ```SQL
 CREATE TABLE doc_survey (
 X1 INT,
@@ -148,7 +159,8 @@ WTYPE INT
 
 <br>
 
-UNION ALL statementis used to merge the 12 tables (from in01 to in12) and the combined data is inserted into the created table 'doc_survey'.
+UNION ALL statementis used to merge the 12 tables (from in01 to in12) and the combined data is inserted into the created table 'doc_survey'
+
 ```SQL
 INSERT INTO doc_survey
 SELECT * FROM in01
@@ -179,7 +191,8 @@ SELECT * FROM in12;
 <br>
 
 # Data quality check on merged data
-## Verify that the total number of rows in each column header tally with the total number of rows added up across the 12 excel files.
+
+Verifying if the total number of rows in each column header tally with the total number of rows added up across the 12 excel files
 ```SQL
 SELECT 
   COUNT(X1) AS Count_X1,
@@ -194,11 +207,11 @@ SELECT
 FROM
 	doc_survey;
 ```
-<img src="https://github.com/bayyangjie/Patient-Experience-Study/blob/main/Images/total_number_of_rows.png?raw=true" width="50%">
+<img src="https://github.com/bayyangjie/Patient-Experience-Study/blob/main/Images/total_number_of_rows.png?raw=true" width="70%">
 
 <br>
 
-## Check for presence of NULL values in the columns of the merged data
+Check for presence of NULL values in the columns of the merged data
 ```SQL
 SELECT *
 FROM doc_survey
@@ -213,17 +226,16 @@ WHERE
 	GENDER IS NULL OR
 	WTYPE IS NULL;
 ```
-<img src="https://github.com/bayyangjie/Patient-Experience-Study/blob/main/Images/check%20for%20null%20values_X1_to_Y.png?raw=true" width="50%">
+<img src="https://github.com/bayyangjie/Patient-Experience-Study/blob/main/Images/check%20for%20null%20values_X1_to_Y.png?raw=true" width="70%">
 
 <br>
 
-## Check for invalid values in each column
+Check for invalid values in each column
 The columns were checked to identify if there were any invalid values that exist apart from those in the original data.
 ```SQL
 # Checking for invalid values in all columns
 
 ## Checking columns X1 to Y since they all have the same distinct values to check for
--- Results show that columns X1 to Y contain valid values that match the distinct values in the original data
 SELECT *
 FROM doc_survey
 WHERE 
@@ -235,7 +247,6 @@ WHERE
     Y NOT IN ('1', '2', '3', '4', '5', '99');
 
 ## Checking columns AGE, GENDER, WTPYE independently since they have different sets of distinc values to check against 
--- Checks show that the column AGE contains valid values that match the original data but the columns GENDER and WTYPE contain invalid values that DO NOT match the original data
 SELECT AGE
 FROM doc_survey
 WHERE AGE NOT IN ('1', '2', '3', '4', '5','6','7','8','99');
@@ -248,8 +259,9 @@ SELECT WTYPE
 FROM doc_survey
 WHERE WTYPE NOT IN ('1','2','3','4');
 ```
+<br>
 
-All the columns contained valid values except for the columns 'GENDER' and 'WTYPE'. The column 'GENDER' included values such as '99' and '4' while the column 'WTYPE' included additional invalid values such as '99'. The invalid values in both columns were converted to NULL.
+All the columns contained valid values except for the columns 'GENDER' and 'WTYPE'. The column 'GENDER' had values such as '99' and '4' while the column 'WTYPE' had invalid values such as '99'. These invalid values in both columns were cleaned up by converting them to NULLs.
 ```SQL
 # Update columns GENDER, WTYPE to replace invalid values with NULL
 SET SQL_SAFE_UPDATES = 0;
@@ -259,6 +271,7 @@ SET
     GENDER = CASE WHEN GENDER IN ('99','4') THEN NULL ELSE GENDER END,
     WTYPE = CASE WHEN WTYPE IN ('99') THEN NULL ELSE WTYPE END;
 ```
+<br>
 
 The columns 'GENDER' and 'WTYPE' were verified again to ensure that only the valid values are present.
 ```SQL
@@ -290,19 +303,14 @@ con <- dbConnect(MySQL(), user = "root", password = "123456", dbname = "ANL503")
 dataframe <- dbReadTable(con, "doc_survey")
 dataframe
 ```
-<br>
-
 ## Analysis
 In terms of the coefficient estimate values, it can be seen that 'X3' (level of empathy by doctor) has the most impact on the outcome variable since it has the highest coefficient estimate value of 0.373128. This means that for every increase in rating of X3, the overall satisfaction rating improves by 0.373128.
 
 Regarding 'AGE' coefficient, it has a very low statistical significance as seen by the presence of one * . Although it has a p-value of < 0.05, the p-value is still significantly higher than those of 'X1' to 'X5'. The coefficient estimate of 'AGE' is also very small (0.010321) as compared to 'X1' to 'X5' coefficients, which suggests it has the smallest impact on the outcome amongst the statistically significant coefficients. 
 
 On the other hand for GENDER/WTYPE, they are not statistically significant at all due to their p-values > 0.05. Logically, this makes sense as well because the survey data of these two coefficients is not related to the satisfaction levels.
-![image](https://github.com/user-attachments/assets/937a2612-11a3-47e6-8c99-3baa393ab9a2)
 
-
-![image](https://github.com/user-attachments/assets/862cd7d6-76e9-41f1-b412-4f3301f5a96a) <br> <br>
-
+<img src="https://github.com/bayyangjie/Patient-Experience-Study/blob/main/Images/regresssion_output.png?raw=true" width="50%"> 
 
 # Performance-Impact Chart
 The purpose of the performance-impact chart was to provide a deeper level of insights into how well doctors have fared in each of the performance metrics. Based on the bar plot, it shows that patients are overall satisfied with the service provided by doctors. This is shown by each of the performance metric X1 to X5 having high counts in the positive ratings of '4' (Good) and '5' (Excellent).
