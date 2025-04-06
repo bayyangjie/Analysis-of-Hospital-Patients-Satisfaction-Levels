@@ -1,5 +1,9 @@
 # Patient Experience Study 
-This project analyse the latest 12 months of patient survey data regarding the quality of service and medical treatment provided by the doctors. The first objective is to analyse which are the measurement metrics that are most influential on the overall patient satisfaction at the hospital. Secondly, the analysis aims to determine  <br>
+This project analyses 12 months of patient survey data about the quality of service and medical treatment provided by the doctors. 
+
+# Objectives
+* The first objective is to extract required segments of the data sources and merge them together. 
+* The second goal is to analyze the combined data to determine which metrics have the greatest impact on overall patient satisfaction and to assess how patients have evaluated the services offered by doctors across each of these metrics.
 
 # Dataset
 * The data stretches over a period of 12 months each and is stored respectively in 12 excel document. The column headers in each document reprsent the measurement metrics with the values describing the ratings provided by patients.
