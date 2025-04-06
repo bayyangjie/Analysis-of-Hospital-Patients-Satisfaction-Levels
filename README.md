@@ -7,8 +7,14 @@ This project analyse the latest 12 months of patient survey data regarding the q
 
 # Tools used
 * Rstudio
+  - Setting up connection to Microsoft SQL server
+  - Creating custom table names in the Database to be used in the SQL server
+  - Extracting source data from local directory and populating tables in Database
 * Tableplus
-* VSCode
+  - Database tables querying
+* Rstudio
+  - Creating linear regression model
+  - Generating bar chart visualisation
 
 # Data pipeline creation
 
