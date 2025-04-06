@@ -70,14 +70,14 @@ for file_path, sheet_name, custom_table_name in zip(file_paths, sheet_names, cus
 ```
 
 ## Inserting data into SQL table
-Once the loop is completed, the 12 tables are created in the SQL database server and each populated with data only from the selected spreadsheets ('Inpatient', 'ip', 'warded', 'inp' and 'ip').
+Once the load is completed, the 12 tables are created in the SQL database server and each populated with data only from the selected spreadsheets ('Inpatient', 'ip', 'warded', 'inp' and 'ip').
 
 <img src="https://github.com/bayyangjie/Patient-Experience-Study/blob/main/Images/tableplus_in01_in12.png?raw=true" width="25%">
 
 <br>
 
 # Data Cleaning
-Prior to merging the tables, each table was first checked for data quality issues such as additional unknown columns and table 'in02' was found to contain many additional columns under the label 'Unnamed: ' and containing null values. Those columns were then dropped using ALTER TABLE and DROP functions.
+Prior to merging the tables, each table is first checked for data quality issues such as additional unknown columns and table 'in02' was found to contain many additional columns under the label 'Unnamed: ' and containing null values. Those columns were then dropped using ALTER TABLE and DROP functions.
 
 ```SQL
 # Verify each table to check for data inconsistencies
@@ -98,7 +98,7 @@ Table 'in02' with the additional unknown columns with the label 'Unnamed: ":
 
 <br>
 
-Return the list of string outputs that indicate the column headers named 'Unnamed:' with purely NULL values in the table 'in02'
+Return a list of string outputs that indicate the columns with NULL values in the table 'in02'.
 
 ```SQL
 SELECT CONCAT('ALTER TABLE in02 DROP COLUMN `', COLUMN_NAME, '`;')
@@ -109,7 +109,7 @@ AND COLUMN_NAME LIKE 'Unnamed:%';  -- includes columns where the name starts wit
 ```
 <br>
 
-Executing ALTER TABLE commands of columns with all NULL values in table 'in02'
+Dropping the columns with all NULL values in the table 'in02'.
 
 ```SQL
 ALTER TABLE in02 DROP COLUMN `Unnamed: 9`;
@@ -147,7 +147,7 @@ ALTER TABLE in02 DROP COLUMN `Unnamed: 39`;
 
 <br>
 
-A custom table 'doc_survey' is created in the SQL server that will store the combined data of all 12 tables
+A custom table 'doc_survey' created that will store the combined data of all 12 tables. UNION ALL to merge the data from the 12 tables and insert into a created table 'doc_survey'.
 
 ```SQL
 CREATE TABLE doc_survey (
@@ -161,13 +161,7 @@ AGE INT,
 GENDER INT,
 WTYPE INT
 );
-```
 
-<br>
-
-UNION ALL statementis used to merge the 12 tables (from in01 to in12) and the combined data is inserted into the created table 'doc_survey'
-
-```SQL
 INSERT INTO doc_survey
 SELECT * FROM in01
 UNION ALL
@@ -196,9 +190,9 @@ SELECT * FROM in12;
 
 <br>
 
-# Data quality check on merged data
+# Data quality check on combined data
 
-Verifying if the total number of rows in each column header tally with the total number of rows added up across the 12 excel files
+Verifying if the total number of rows in each column tallies with the sum of rows across the 12 excel files
 ```SQL
 SELECT 
   COUNT(X1) AS Count_X1,
@@ -217,7 +211,7 @@ FROM
 
 <br>
 
-Check for presence of NULL values in the columns of the merged data
+Check for presence of NULL values in the columns of the combined data
 ```SQL
 SELECT *
 FROM doc_survey
@@ -237,7 +231,7 @@ WHERE
 <br>
 
 Check for invalid values in each column
-The columns were checked to identify if there were any invalid values that exist apart from those in the original data.
+The columns were checked to identify if there are any invalid values.
 ```SQL
 # Checking for invalid values in all columns
 
@@ -267,7 +261,7 @@ WHERE WTYPE NOT IN ('1','2','3','4');
 ```
 <br>
 
-All the columns contained valid values except for the columns 'GENDER' and 'WTYPE'. The column 'GENDER' had values such as '99' and '4' while the column 'WTYPE' had invalid values such as '99'. These invalid values in both columns were cleaned up by converting them to NULLs.
+All columns contained valid values except for the columns 'GENDER' and 'WTYPE'. The column 'GENDER' had values such as '99' and '4' while the column 'WTYPE' had invalid values such as '99'. The invalid values were cleaned up by converting them to NULLs.
 ```SQL
 # Update columns GENDER, WTYPE to replace invalid values with NULL
 SET SQL_SAFE_UPDATES = 0;
