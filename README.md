@@ -2,8 +2,8 @@
 This project analyse the latest 12 months of patient survey data regarding the quality of service and medical treatment provided by the doctors. The first objective is to analyse which are the measurement metrics that are most influential on the overall patient satisfaction at the hospital. Secondly, the analysis aims to determine  <br>
 
 # Dataset
-* The timeline for the data used is over a period of 12 months each stored respectively in 12 excel document. All the documents also contain the same column headers. Each document also contains different spreadsheets.
-* The column headers represent different quality metrics that are measured, for example overall satisfaction, level of empathy, doctor competency etc. The metrics have different rating levels. For example, the metric "respectful" has ratings from 1 to 5 and 99 (1:Very Poor to 5:Excellent, and 99:NA which refers to no response recorded)
+* The data stretches over a period of 12 months each and is stored respectively in 12 excel document. The column headers in each document reprsent the measurement metrics with the values describing the ratings provided by patients.
+* Each document contains different spreadsheets which describe the type of admission the patient is in for (inpatient, outpatient, emergency)
 
 # Tools used
 * Rstudio
