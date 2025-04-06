@@ -27,7 +27,7 @@ In this project,a data flow is assembled by creating a single Python program tha
 
 Variables are first created to store the list of the excel file paths, list of the required sheet names across the excel documents and a list of custom table names assigned to each excel document.
 
-The for loop iterates through each file path, the sheets in each document and the custom table names. Once the loop is completed, the custom tables will each be populated with the data from the required spreadsheets.
+The for loop iterates through each file path, sheets in each document and the custom table names, populating the tables with the selected data.
 
 ```SQL
 # Create a list of the different file paths where the excel sheets are stored
@@ -72,13 +72,6 @@ for file_path, sheet_name, custom_table_name in zip(file_paths, sheet_names, cus
     # Upload data to MySQL using the custom table name
     data.to_sql(custom_table_name, con=engine, if_exists="replace", index=False)
 ```
-
-## Inserting data into SQL table
-Once the load is completed, the 12 tables are created in the SQL database server and each populated with data only from the selected spreadsheets ('Inpatient', 'ip', 'warded', 'inp' and 'ip').
-
-<img src="https://github.com/bayyangjie/Patient-Experience-Study/blob/main/Images/tableplus_in01_in12.png?raw=true" width="25%">
-
-<br>
 
 # Data Cleaning
 Prior to merging the tables, each table is first checked for data quality issues such as additional unknown columns and table 'in02' was found to contain many additional columns under the label 'Unnamed: ' and containing null values. Those columns were then dropped using ALTER TABLE and DROP functions.
@@ -151,7 +144,7 @@ ALTER TABLE in02 DROP COLUMN `Unnamed: 39`;
 
 <br>
 
-A custom table 'doc_survey' created that will store the combined data of all 12 tables. UNION ALL to merge the data from the 12 tables and insert into a created table 'doc_survey'.
+A custom table 'doc_survey' is created to store the combined data of all 12 table using UNION ALL.
 
 ```SQL
 CREATE TABLE doc_survey (
@@ -289,12 +282,7 @@ FROM doc_survey;
 
 <img src="https://github.com/bayyangjie/Patient-Experience-Study/blob/main/Images/WTYPE_distinct_values_verify.png?raw=true" width="25%">
 
-# Linear Regression
-A linear regresion model was ran using R and with the variable 'Y' (overall satisfaction by patients) set as the response variable and other variables as the predictor variables. The purpose was to understand the metrics that were most influential on the response variable 'Y'.
-
-Out of all the other variables (X1/X2/X3/X4/X5/AGE/GENDER/WTYPE), X1 to X5 were selected as the predictor variables. The lm model results showed that they were the most impactful on the response variable 'Y' (patient overall satisfaction). 
-
-## Establishing MySQL-R connection
+# Establishing MySQL-R connection
 A connection was established between MySQL and R using the RMySQL package to allow querying on the database in MySQL to be done in R.
 
 Based on the regression output, it could be inferred that coefficients "X1" to "X5" are the most statistically significant and can potentially impact the response variable "Y" (overall patient satisfaction) the most. This can be seen from the *** sign of all 5 coefficients. Additionally, the p-values of all 5 coefficients are < 0.05, which represents statistical significance.
@@ -307,6 +295,12 @@ con <- dbConnect(MySQL(), user = "root", password = "123456", dbname = "ANL503")
 dataframe <- dbReadTable(con, "doc_survey")
 dataframe
 ```
+
+# Linear Regression
+A linear regresion model was ran using R and with the variable 'Y' (overall satisfaction by patients) set as the response variable and other variables as the predictor variables. The purpose was to understand the metrics that were most influential on the response variable 'Y'.
+
+Out of all the other variables (X1/X2/X3/X4/X5/AGE/GENDER/WTYPE), X1 to X5 were selected as the predictor variables. The lm model results showed that they were the most impactful on the response variable 'Y' (patient overall satisfaction).
+
 ## Analysis
 In terms of the coefficient estimate values, it can be seen that 'X3' (level of empathy by doctor) has the most impact on the outcome variable since it has the highest coefficient estimate value of 0.373128. This means that for every increase in rating of X3, the overall satisfaction rating improves by 0.373128.
 
